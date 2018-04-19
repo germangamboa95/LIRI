@@ -1,0 +1,23 @@
+{
+  "name": "liri",
+  "version": "1.0.0",
+  "description": "Language recognition script that performs tasks. ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/germangamboa95/LIRI.git"
+  },
+  "author": "German Gamboa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/germangamboa95/LIRI/issues"
+  },
+  "homepage": "https://github.com/germangamboa95/LIRI#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^5.0.1"
+  }
+}
