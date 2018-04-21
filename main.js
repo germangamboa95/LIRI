@@ -1,5 +1,3 @@
-require('dotenv').config();
+const keys = require('./keys.js')
 
-let foo = parseInt(process.env.german);
-
-console.log(typeof foo);
+console.log(keys);
