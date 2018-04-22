@@ -18,6 +18,8 @@
   "homepage": "https://github.com/germangamboa95/LIRI#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "dotenv": "^5.0.1"
+    "dotenv": "^5.0.1",
+    "node-spotify-api": "^1.0.7",
+    "twitter": "^1.7.1"
   }
 }
