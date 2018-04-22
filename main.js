@@ -3,20 +3,17 @@ const Twitter = require('twitter');
 const Spotify = require('node-spotify-api');
 const axios = require('axios');
 const fs = require('fs');
-
+const request = require('request');
 
 
 const client = new Twitter(keys.twitter);
 const spotify = new Spotify(keys.spotify);
 
-const theSwitch = () => {
-    console.clear();
+const theSwitch = (verb, noun) => {
+   console.clear();
 
-
-    const verb = process.argv[2];
-    const noun = process.argv.splice(3).join(' ');   
-
-
+   verb = verb || process.argv[2];
+   noun = noun || process.argv.splice(3).join(' ');   
 
     switch (verb) {
         case 'my-tweets':
@@ -32,10 +29,7 @@ const theSwitch = () => {
             random();
             break
     }
-    
-
 }
-
 
 
 const getTwits = () => {
@@ -64,57 +58,21 @@ const getSong = (song) => {
 const getMovie = movie => {
     movie = movie.replace(' ', '+');
     console.log(movie);
-    // axios.get(`http://www.omdbapi.com/?t=${movie}&y=&plot=short&apikey=trilogy`)
-    // .then(res => console.log(res.data))
-    // .catch(err => console.log(err));
+//     axios.get(`http://www.omdbapi.com/?t=${movie}&y=&plot=short&apikey=trilogy`)
+//     .then(res => console.log(res.data))
+//     .catch(err => console.log(err));
+
+
 }
-
-
 
 const random = () => {
     return fs.readFile('random.txt','utf8', (err, data) => {
         if (err) throw err;
         data = data.split(',');
-        const rand = Math.floor(Math.random() * 3);
-        data = data[rand];
-        console.log(data);
+        const rand = Math.floor(Math.random() * 3 );
+        data = data[rand].split(':')
+        theSwitch(data[0].trim(), data[1]);
       });
 }
-
-
-// Switch statement controls below
-
-const verb = process.argv[2];
-const noun = process.argv.splice(3).join(' ');
-
-
-const theSwitch = () => {
-    console.clear();
-
-
-    const verb = process.argv[2];
-    const noun = process.argv.splice(3).join(' ');   
-
-
-
-    switch (verb) {
-        case 'my-tweets':
-            getTwits();
-            break;
-        case 'spotify-this-song': 
-            getSong(noun);
-            break;
-        case 'movie-this':
-            getMovie(noun);
-            break;
-        case 'do-what-it-says':
-            random();
-            break
-    }
-    
-
-}
-
-
 
 theSwitch();
