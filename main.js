@@ -6,8 +6,8 @@ const fs = require('fs');
 const request = require('request');
 
 
-const client = new Twitter(keys.twitter);
-const spotify = new Spotify(keys.spotify);
+// const client = new Twitter(keys.twitter);
+// const spotify = new Spotify(keys.spotify);
 
 const theSwitch = (verb, noun) => {
    console.clear();
@@ -41,6 +41,7 @@ const getTwits = () => {
 }
 
 const getSong = (song) => {
+    song = song || 'The Sign';
     return spotify.search({ type: 'track', query: song , limit: 5 }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
@@ -56,11 +57,20 @@ const getSong = (song) => {
 }
 
 const getMovie = movie => {
-    movie = movie.replace(' ', '+');
+    movie = movie.replace(' ', '+') || 'Mr. Nobody.';
     console.log(movie);
-//     axios.get(`http://www.omdbapi.com/?t=${movie}&y=&plot=short&apikey=trilogy`)
-//     .then(res => console.log(res.data))
-//     .catch(err => console.log(err));
+    axios.get(`http://www.omdbapi.com/?t=${movie}&y=&plot=short&apikey=trilogy`)
+    .then(res => {
+            console.log("Title: ", res.data.Title)
+            console.log("Released: ", res.data.Year)
+            console.log("IMDB Rating: ", res.data.imdbRating)
+            console.log("Rotten Tomatoes: ", res.data.Ratings[1].Value)
+            console.log("Location Produced: ", res.data.Country)
+            console.log("Language/s: ", res.data.Language)
+            console.log("Plot: ", res.data.Plot)
+            console.log("Actors: ", res.data.Actors)
+    })
+    .catch(err => console.log(err));
 
 
 }
@@ -72,6 +82,21 @@ const random = () => {
         const rand = Math.floor(Math.random() * 3 );
         data = data[rand].split(':')
         theSwitch(data[0].trim(), data[1]);
+      });
+}
+
+const logger = (data) => {
+
+    data = 
+    `--------------------------
+      ${data}
+    
+    `;
+
+
+    fs.appendFile('log.txt', data, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
       });
 }
 
