@@ -6,8 +6,8 @@ const fs = require('fs');
 const request = require('request');
 
 
-// const client = new Twitter(keys.twitter);
-// const spotify = new Spotify(keys.spotify);
+const client = new Twitter(keys.twitter);
+const spotify = new Spotify(keys.spotify);
 
 const theSwitch = (verb, noun) => {
    console.clear();
