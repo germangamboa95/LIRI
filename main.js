@@ -36,7 +36,10 @@ const getTwits = () => {
     return client.get('statuses/user_timeline',{include_rts: false }, function(error, tweet, response) {
         if(error) throw error
         const data = JSON.parse(response.body);
-        data.forEach(item => console.log("Twit: " + item.text + "\n" + "Created at: " + item.created_at));
+        data.forEach(item => {
+            console.log("Twit: " + item.text + "\n" + "Created at: " + item.created_at);
+            logger(item);
+        });
       });
 }
 
@@ -52,6 +55,7 @@ const getSong = (song) => {
             console.log(item.preview_url);
             console.log(item.album.name)
             console.log(item.artists[0].name)
+            logger(item);
         });
       });
 }
@@ -69,6 +73,7 @@ const getMovie = movie => {
             console.log("Language/s: ", res.data.Language)
             console.log("Plot: ", res.data.Plot)
             console.log("Actors: ", res.data.Actors)
+            logger(res.data);
     })
     .catch(err => console.log(err));
 
@@ -89,7 +94,7 @@ const logger = (data) => {
 
     data = 
     `--------------------------
-      ${data}
+      ${JSON.stringify(data)}
     
     `;
 
